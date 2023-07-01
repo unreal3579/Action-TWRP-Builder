@@ -41,6 +41,14 @@ on:
         description: 'BUILD_TARGET'
         required: true
         default: 'recovery'
+      APPLYPATCH:
+        description: 'Apply diff.patch (true or false)'
+        required: true
+        default: yes
+        type: choice
+        options:
+        - yes
+        - no
 
 jobs:
   build:
