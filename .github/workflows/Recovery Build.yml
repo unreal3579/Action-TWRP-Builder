@@ -41,15 +41,7 @@ on:
         description: 'BUILD_TARGET'
         required: true
         default: 'recovery'
-      APPLYPATCH:
-        description: 'Apply diff.patch (true or false)'
-        required: true
-        default: yes
-        type: choice
-        options:
-        - yes
-        - no
-
+      
 jobs:
   build:
     if: github.event.repository.owner.id == github.event.sender.id
@@ -153,7 +145,6 @@ jobs:
         swap-size-gb: 12
 
     - name: Apply custom diff.patch
-      if: github.event.inputs.APPLYPATCH == 'true'
       run: |
         bash ${GITHUB_WORKSPACE}/workspace/${{ github.event.inputs.DEVICE_PATH }}/patches/apply-patches.sh
       working-directory: ${{ steps.pwd.outputs.workspace-folder }}
