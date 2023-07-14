@@ -7,28 +7,38 @@ on:
         description: 'MANIFEST_URL (if want to use SSH keys, use git@github.com:XXXXX)'
         required: true
         default: 'https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp'
+        type: choice
+        options:
+        - 'https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp'
+        - 'https://github.com/SHRP/manifest.git'
       MANIFEST_BRANCH:
         description: 'MANIFEST_BRANCH'
         required: true
         default: 'twrp-12.1'
+        type: choice
+        options:
+        - 'twrp-12.1'
+        - 'shrp-12.1'
       DEVICE_TREE_URL:
         description: 'DEVICE_TREE_URL'
         required: true
         default: 'https://github.com/unreal3579/device_xiaomi_ziyi'
+        type: choice
+        options:
+        - 'https://github.com/unreal3579/device_xiaomi_ziyi'
+        - 'https://github.com/unreal3579/device_xiaomi_ziyi_shrp'
       DEVICE_TREE_BRANCH:
         description: 'DEVICE_TREE_BRANCH'
         required: true
         default: 'twrp-12.1'
+        type: choice
+        options:
+        - 'twrp-12.1'
+        - 'shrp-12.1'
       DEVICE_PATH:
         description: 'DEVICE_PATH'
         required: true
         default: 'device/xiaomi/ziyi'
-      COMMON_TREE_URL:
-        description: 'COMMON_TREE_URL (if no common tree, leave blank)'
-        required: false
-      COMMON_PATH:
-        description: 'COMMON_PATH (if no common tree, leave blank)'
-        required: false
       DEVICE_NAME:
         description: 'DEVICE_NAME'
         required: true
@@ -41,6 +51,14 @@ on:
         description: 'BUILD_TARGET'
         required: true
         default: 'recovery'
+      APPLYPATCH:
+        description: 'Apply diff.patch (true or false)'
+        required: true
+        default: 'yes'
+        type: choice
+        options:
+        - yes
+        - no
       
 jobs:
   build:
@@ -116,14 +134,6 @@ jobs:
         git clone ${{ github.event.inputs.DEVICE_TREE_URL }} -b ${{ github.event.inputs.DEVICE_TREE_BRANCH }} ./${{ github.event.inputs.DEVICE_PATH }}
       working-directory: ${{ steps.pwd.outputs.workspace-folder }}
 
-    - name: Clone common tree
-      if: |
-        github.event.inputs.COMMON_TREE_URL != null
-        && github.event.inputs.COMMON_PATH != null
-      run: |
-        git clone ${{ github.event.inputs.COMMON_TREE_URL }} -b ${{ github.event.inputs.DEVICE_TREE_BRANCH }} ./${{ github.event.inputs.COMMON_PATH }}
-      working-directory: ${{ steps.pwd.outputs.workspace-folder }}
-
     - name: Check Build Tree
       uses: haya14busa/action-cond@v1
       id: buildtree
@@ -145,6 +155,7 @@ jobs:
         swap-size-gb: 12
 
     - name: Apply custom diff.patch
+      if: github.event.inputs.APPLYPATCH == 'true'
       run: |
         bash ${GITHUB_WORKSPACE}/workspace/${{ github.event.inputs.DEVICE_PATH }}/patches/apply-patches.sh
       working-directory: ${{ steps.pwd.outputs.workspace-folder }}
