@@ -11,6 +11,7 @@ on:
         options:
         - 'https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp'
         - 'https://github.com/SHRP/manifest.git'
+        - 'https://github.com/PitchBlackRecoveryProject/manifest_pb'
       MANIFEST_BRANCH:
         description: 'MANIFEST_BRANCH'
         required: true
@@ -19,6 +20,7 @@ on:
         options:
         - 'twrp-12.1'
         - 'shrp-12.1'
+        - 'android-12.1'
       DEVICE_TREE_URL:
         description: 'DEVICE_TREE_URL'
         required: true
@@ -27,6 +29,7 @@ on:
         options:
         - 'https://github.com/unreal3579/device_xiaomi_ziyi'
         - 'https://github.com/unreal3579/device_xiaomi_ziyi_shrp'
+        - 'https://github.com/unreal3579/device_xiaomi_ziyi_pbrp'
       DEVICE_TREE_BRANCH:
         description: 'DEVICE_TREE_BRANCH'
         required: true
@@ -35,6 +38,7 @@ on:
         options:
         - 'twrp-12.1'
         - 'shrp-12.1'
+        - 'android-12.1'
       DEVICE_PATH:
         description: 'DEVICE_PATH'
         required: true
@@ -50,7 +54,13 @@ on:
       BUILD_TARGET:
         description: 'BUILD_TARGET'
         required: true
-        default: 'recovery'
+        default: 'recoveryimage'
+        type: choice
+        options:
+        - 'recoveryimage'
+        - 'bootimage'
+        - 'vendorbootimage'
+        - 'pbrp'
       APPLYPATCH:
         description: 'Apply diff.patch (true or false)'
         required: true
