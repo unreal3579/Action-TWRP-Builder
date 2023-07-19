@@ -54,13 +54,13 @@ on:
       BUILD_TARGET:
         description: 'BUILD_TARGET'
         required: true
-        default: 'recoveryimage'
+        default: 'recovery'
         type: choice
         options:
-        - 'recoveryimage'
-        - 'bootimage'
-        - 'vendorbootimage'
-        - 'pbrp'
+        - 'recovery'
+        - 'boot'
+        - 'vendorboot'
+#        - 'pbrp'
       APPLYPATCH:
         description: 'Apply diff.patch (true or false)'
         required: true
