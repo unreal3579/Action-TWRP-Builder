@@ -19,6 +19,8 @@ on:
         type: choice
         options:
         - 'twrp-12.1'
+        - 'twrp-13'
+        - 'twrp-14'
         - 'shrp-12.1'
         - 'android-12.1'
       DEVICE_TREE_URL:
