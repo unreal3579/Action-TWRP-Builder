@@ -133,12 +133,12 @@ jobs:
         echo "workspace-folder=$(pwd)" >> $GITHUB_OUTPUT
         git config --global user.name "unreal3579"
         git config --global user.email "unreal3579@bk.ru"
-        python3 repo init --depth=1 -u ${{ github.event.inputs.MANIFEST_URL }} -b ${{ github.event.inputs.MANIFEST_BRANCH }}
+        python3 /usr/bin/repo init --depth=1 -u ${{ github.event.inputs.MANIFEST_URL }} -b ${{ github.event.inputs.MANIFEST_BRANCH }}
       id: pwd
           
     - name: Repo Sync
       run: |
-        python3 repo sync -j$(nproc --all) --force-sync
+        python3 /usr/bin/repo sync -j$(nproc --all) --force-sync
       working-directory: workspace
       
     - name: Clone device tree
@@ -157,7 +157,7 @@ jobs:
     - name: Sync Device Dependencies
       run: |
         bash ${GITHUB_WORKSPACE}/scripts/convert.sh ${{ github.event.inputs.DEVICE_PATH }}/${{ steps.buildtree.outputs.value }}.dependencies
-        python3 repo sync -j$(nproc --all)
+        python3 /usr/bin/repo sync -j$(nproc --all)
       working-directory: ${{ steps.pwd.outputs.workspace-folder }}
       continue-on-error: true
 
