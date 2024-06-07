@@ -32,7 +32,7 @@ on:
         - 'https://github.com/unreal3579/device_xiaomi_ziyi'
         - 'https://github.com/unreal3579/device_xiaomi_ziyi_shrp'
         - 'https://github.com/unreal3579/device_xiaomi_ziyi_pbrp'
-        - 'https://github.com/XvSvM/TWRP_gamebox_GM8K'
+        - 'https://github.com/unreal3579/TWRP_gamebox_GM8K'
       DEVICE_TREE_BRANCH:
         description: 'DEVICE_TREE_BRANCH'
         required: true
