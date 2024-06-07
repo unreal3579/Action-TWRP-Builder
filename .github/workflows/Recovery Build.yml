@@ -32,6 +32,7 @@ on:
         - 'https://github.com/unreal3579/device_xiaomi_ziyi'
         - 'https://github.com/unreal3579/device_xiaomi_ziyi_shrp'
         - 'https://github.com/unreal3579/device_xiaomi_ziyi_pbrp'
+        - 'https://github.com/XvSvM/TWRP_gamebox_GM8K'
       DEVICE_TREE_BRANCH:
         description: 'DEVICE_TREE_BRANCH'
         required: true
@@ -41,6 +42,7 @@ on:
         - 'twrp-12.1'
         - 'shrp-12.1'
         - 'android-12.1'
+        - 'gamebox'
       DEVICE_PATH:
         description: 'DEVICE_PATH'
         required: true
